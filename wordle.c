@@ -4,20 +4,21 @@
 #include <stdbool.h>
 #include <string.h>
 
-void afficher_alphabet(char* m, bool* vus){
+char* voyelles = "aeiouy";
+char* consonnes = "bcdfghjklmnpqrstvwxz";
+
+void afficher_lettres(char* m, char* tab, bool* vus){
     printf(" | ");
-    for (int i = 0; i<26;i++){
-        char letter = 'a' + i;
-        if (vus[letter-97]){
+    for (int i = 0; i<strlen(tab);i++){
+        if (vus[tab[i]-97]){
             printf("\033[32m");
         }
         else{
             printf("\033[00m");
         }
-        printf("%c ", letter);
+        printf("%c ", tab[i]);
         printf("\033[00m");
     }
-    printf("\n");
 }
 void affiche(int* jsp, char* mot, bool* vus){
     for(int i = 0; i<5;i++){
@@ -33,7 +34,8 @@ void affiche(int* jsp, char* mot, bool* vus){
         printf("%c", mot[i]);
     }
     printf("\033[00m");
-    afficher_alphabet(mot, vus);
+    afficher_lettres(mot, voyelles, vus);
+    afficher_lettres(mot, consonnes, vus);
     printf("\n");
     return;
 }
